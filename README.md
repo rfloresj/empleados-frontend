@@ -10,6 +10,7 @@ This project is a **frontend application** built with **Angular 19** that provid
 - 🛠 **Employee and Area Management**: Create, Read, Update, and Delete (CRUD) operations.
 - 🏢 **Entity Relationships**: Employees are linked to specific areas.
 - 📡 **REST API Integration**: Communicates with a backend API to fetch and modify data.
+- 🔐 **JWT Authentication**: Secure login system with protected routes.
 - 🌐 **Routing**: Uses Angular Router for navigation.
 - 🎨 **Styling with TailwindCSS**: Responsive design and clean UI.
 - 🔔 **Notifications**: Uses **Toastify.js** for alerts and success messages.
@@ -28,11 +29,17 @@ This project is a **frontend application** built with **Angular 19** that provid
  ┃ ┃ ┣ 📂 components       # UI Components
  ┃ ┃ ┃ ┣ 📂 employees      # Employee-related components
  ┃ ┃ ┃ ┣ 📂 areas          # Area-related components
- ┃ ┃ ┃ ┣ 📂 nav-bar        # Navigation bar component
- ┃ ┃ ┃ ┗ 📂 app-menu       # Sidebar menu component
+ ┃ ┃ ┃ ┣ 📂 login         # Login component
+ ┃ ┃ ┃ ┣ 📂 nav-bar       # Navigation bar component
+ ┃ ┃ ┃ ┗ 📂 app-menu      # Sidebar menu component
  ┃ ┃ ┣ 📂 services        # Services for API interaction
  ┃ ┃ ┃ ┣ 📜 employee.service.ts
- ┃ ┃ ┃ ┗ 📜 area.service.ts
+ ┃ ┃ ┃ ┣ 📜 area.service.ts
+ ┃ ┃ ┃ ┗ 📜 auth.service.ts  # Authentication service
+ ┃ ┃ ┣ 📂 guards          # Route guards for authentication
+ ┃ ┃ ┃ ┗ 📜 auth.guard.ts
+ ┃ ┃ ┣ 📂 interceptors    # JWT token interceptor
+ ┃ ┃ ┃ ┗ 📜 jwt.interceptor.ts
  ┃ ┃ ┣ 📜 app.component.ts  # Root component
  ┃ ┃ ┣ 📜 app.routes.ts     # Application routes
  ┃ ┃ ┗ 📜 app.config.ts     # Angular app configuration
@@ -52,6 +59,7 @@ This project is a **frontend application** built with **Angular 19** that provid
 - **Angular 19** - Frontend framework
 - **TailwindCSS** - Modern styling framework
 - **RxJS** - Reactive programming for handling API responses
+- **JWT Authentication** - Secure user authentication and route protection
 - **Toastify.js** - For user notifications
 - **TypeScript** - Strongly typed JavaScript
 - **Zone.js** - Execution context management
@@ -94,67 +102,42 @@ The application will be available at: **[http://localhost:4200](http://localhost
 
 ## 📌 Available Features
 
+### 🔹 Authentication (`/api/auth`)
+
+- **POST** `/login` - Authenticate and obtain a JWT token.
+  
+  **Note:** The authentication in this project is currently hardcoded for testing purposes. To log in, use the following credentials:
+  
+  ```sh
+  Email: user@test.com
+  Password: password123
+  ```
+  
+  In a real application, user credentials should be validated against a database, and passwords should be securely hashed.
+
 ### 🔹 Employees
 
-- View the list of employees.
-- Create a new employee.
-- Edit existing employees.
-- Delete employees.
+- View the list of employees (**Requires Authentication**).
+- Create a new employee (**Requires Authentication**).
+- Edit existing employees (**Requires Authentication**).
+- Delete employees (**Requires Authentication**).
 
 ### 🔹 Areas
 
-- View all areas.
-- Create a new area.
-- Edit an area.
-- Delete an area.
+- View all areas (**Requires Authentication**).
+- Create a new area (**Requires Authentication**).
+- Edit an area (**Requires Authentication**).
+- Delete an area (**Requires Authentication**).
 
 ---
 
-## Code scaffolding
+## 🔑 Authentication Mechanism
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Users authenticate by sending a **POST** request to `/api/auth/login` with valid credentials.
+- If authenticated successfully, the server returns a **JWT token**.
+- The frontend stores the JWT token in **localStorage**.
+- To access protected routes, the **Auth Guard (`auth.guard.ts`)** ensures authentication.
+- All API requests include the **JWT token** in the headers via an **HTTP Interceptor (`jwt.interceptor.ts`)**.
 
 ---
 
