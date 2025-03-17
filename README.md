@@ -13,6 +13,7 @@ This project is a **frontend application** built with **Angular 19** that provid
 - 🌐 **Routing**: Uses Angular Router for navigation.
 - 🎨 **Styling with TailwindCSS**: Responsive design and clean UI.
 - 🔔 **Notifications**: Uses **Toastify.js** for alerts and success messages.
+- 📂 **Organized Project Structure**: Maintains a clean architecture for scalability and maintainability.
 
 ---
 
