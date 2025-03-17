@@ -157,5 +157,12 @@ For more information on using the Angular CLI, including detailed command refere
 
 ---
 
+## 🔗 Related Projects
+
+This frontend is designed to work with the **Employee and Area Management API**, built with **Node.js, Express, and Sequelize**.
+You can find the backend repository here: [empleados-backend](https://github.com/rfloresj/empleados-backend)
+
+---
+
 This frontend is designed to provide an **intuitive and efficient** user experience for managing employees and areas within an organization. 🚀
 
