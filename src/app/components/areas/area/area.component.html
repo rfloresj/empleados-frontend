@@ -1,0 +1,15 @@
+<div class="backdrop" (click)="onClose()"></div>
+<dialog open>
+  <h1>Editar área</h1>
+  <form class="pt-2" (ngSubmit)="onSubmit()">
+    <p>
+      <label for="area">Área</label>
+      <input type="text" id="area" name="area" [(ngModel)]="enteredArea" />
+    </p>
+
+    <p class="actions">
+      <button type="button" (click)="onClose()">Cancelar</button>
+      <button type="submit">Actualizar</button>
+    </p>
+  </form>
+</dialog>
